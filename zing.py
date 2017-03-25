@@ -7,11 +7,22 @@ import requests
 import bs4
 from lxml import etree
 import sys  
-
 reload(sys)  
 sys.setdefaultencoding('utf8')
 
+def get_lyrics(song_id):
+    data_xml = requests.get("http://mp3.zing.vn/json/song/get-lyrics?id=" + song_id)
+    response_content = json.loads(data_xml.content)['html']
+    html = bs4.BeautifulSoup(response_content, 'html.parser')
+    lyrics = html.find_all('p', class_='fn-wlyrics fn-content')
+    if len(lyrics) > 0:
+        return lyrics[0].get_text()
+    else:
+        return ""
+
+# Retrieve lyrics and save file
 def save_as(song_id, file_name, link):
+    print get_lyrics(song_id)
 
     with open(file_name, 'wb') as f:
         response = requests.get(link, stream=True)
