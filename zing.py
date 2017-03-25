@@ -21,7 +21,7 @@ def save_as(file_name, link):
 
 def _name(artist, name):
     return '{name}-{artist}'.format(name=name.encode('utf-8'), artist=artist.encode('utf-8')).\
-        replace(' ', '_').replace('/', '')
+        replace('/', '')
 
 
 def _name_without_extension(artist, name):
@@ -97,7 +97,7 @@ def main():
 
     if is_single:
         song_name, mp3_link = get_mp3(link)
-        save_as(song_name, mp3_link)
+        save_as(song_name + ".mp3", mp3_link)
     else:
         album, songs = get_album(link)
         save_album(album, songs)
