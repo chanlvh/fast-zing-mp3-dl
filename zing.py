@@ -6,9 +6,13 @@ from argparse import ArgumentParser
 import requests
 import bs4
 from lxml import etree
+import sys  
 
+reload(sys)  
+sys.setdefaultencoding('utf8')
 
-def save_as(file_name, link):
+def save_as(song_id, file_name, link):
+
     with open(file_name, 'wb') as f:
         response = requests.get(link, stream=True)
 
@@ -17,10 +21,10 @@ def save_as(file_name, link):
 
         for block in response.iter_content(1024):
             f.write(block)
-    print('save' + link)
+    print 'Saved ' + song_id + ' to ' + file_name
 
 def _name(artist, name):
-    return '{name}-{artist}'.format(name=name.encode('utf-8'), artist=artist.encode('utf-8')).\
+    return '{name} - {artist}'.format(name=name.encode('utf-8'), artist=artist.encode('utf-8')).\
         replace('/', '')
 
 
@@ -50,11 +54,11 @@ def get_mp3(link):
     data_xml = requests.get(data_xml_link)
     # hey, zing devs, why json when you name it xml T_T?
     data = json.loads(data_xml.content)['data'][0]
-
+    song_id = data['id']
     song_name = _name(data['artist'], data['name'])
     mp3_link = data['source_list'][0]
 
-    return song_name, mp3_link
+    return song_id, song_name, mp3_link
 
 
 def get_album(link):
@@ -66,9 +70,7 @@ def get_album(link):
     for datum in data:
         song_name = _name(datum['artist'], datum['name'])
         link = datum['source_list'][0]
-        songs.append((song_name, link,))
-
-    print(album)
+        songs.append((datum['id'], song_name, link))
 
     return album, songs
 
@@ -78,11 +80,10 @@ def save_album(album, songs):
         os.makedirs(album)
 
     for song in songs:
-        name, link = song
+        song_id, name, link = song
         file_name = '{album}/{song_name}.mp3'.format(album=album,
                                                      song_name=name)
-        print('Saving', file_name)
-        save_as(file_name, link)
+        save_as(song_id, file_name, link)
 
 
 def main():
@@ -96,8 +97,8 @@ def main():
     link = args.link
 
     if is_single:
-        song_name, mp3_link = get_mp3(link)
-        save_as(song_name + ".mp3", mp3_link)
+        song_id, song_name, mp3_link = get_mp3(link)
+        save_as(song_id, song_name + ".mp3", mp3_link)
     else:
         album, songs = get_album(link)
         save_album(album, songs)

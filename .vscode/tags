@@ -1,0 +1,23 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ArgumentParser	../zing.py	/^from argparse import ArgumentParser$/;"	kind:namespace	line:4
+_fetch_data_xml	../zing.py	/^def _fetch_data_xml(link):$/;"	kind:function	line:32
+_fetch_data_xml_for_single	../zing.py	/^def _fetch_data_xml_for_single(link):$/;"	kind:function	line:40
+_name	../zing.py	/^def _name(artist, name):$/;"	kind:function	line:22
+_name_without_extension	../zing.py	/^def _name_without_extension(artist, name):$/;"	kind:function	line:27
+bs4	../zing.py	/^import bs4$/;"	kind:namespace	line:7
+etree	../zing.py	/^from lxml import etree$/;"	kind:namespace	line:8
+get_album	../zing.py	/^def get_album(link):$/;"	kind:function	line:60
+get_mp3	../zing.py	/^def get_mp3(link):$/;"	kind:function	line:48
+json	../zing.py	/^import json$/;"	kind:namespace	line:3
+main	../zing.py	/^def main():$/;"	kind:function	line:88
+os	../zing.py	/^import os$/;"	kind:namespace	line:1
+re	../zing.py	/^import re$/;"	kind:namespace	line:2
+requests	../zing.py	/^import requests$/;"	kind:namespace	line:6
+save_album	../zing.py	/^def save_album(album, songs):$/;"	kind:function	line:76
+save_as	../zing.py	/^def save_as(file_name, link):$/;"	kind:function	line:11
+zing.py	../zing.py	1;"	kind:file	line:1
